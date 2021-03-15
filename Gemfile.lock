@@ -85,7 +85,6 @@ GEM
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
-    honoka-rails (3.3.7)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -227,7 +226,6 @@ DEPENDENCIES
   bootstrap (~> 4.3.1)
   byebug
   capybara (>= 2.15)
-  honoka-rails (>= 3.3.6.3)
   jbuilder (~> 2.7)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
