@@ -1,9 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
-
   describe 'アウトプット投稿' do
-
     before do
       @post = FactoryBot.build(:post)
     end
@@ -18,7 +16,7 @@ RSpec.describe Post, type: :model do
       it 'テキストが空だと投稿できないこと' do
         @post.post_text = nil
         @post.valid?
-        expect(@post.errors.full_messages).to include("Post text is required")
+        expect(@post.errors.full_messages).to include('Post text is required')
       end
     end
   end

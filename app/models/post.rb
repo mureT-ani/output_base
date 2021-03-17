@@ -5,7 +5,8 @@ class Post < ApplicationRecord
   validate :post_text_required
 
   private
+
   def post_text_required
-    errors.add(:post_text, "is required") unless post_text.body.present?
+    errors.add(:post_text, 'is required') unless post_text.body.present?
   end
 end
