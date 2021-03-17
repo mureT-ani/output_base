@@ -7,6 +7,8 @@ class User < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :job
 
+  has_many :posts
+
   validates :email, uniqueness: true
   with_options presence: true do
     validates :nickname

@@ -1,0 +1,9 @@
+<%= render  "shared/header" %>
+<h1>アウトプット投稿</h1>
+<%= form_with model:@post, url: posts_path, local: true do |f| %>
+  <%= render  "shared/error_messages", model: f.object %>
+  <%= f.label :post_text, class:"text-white" %>
+  <%= f.rich_text_area :post_text %>
+  <%= f.submit "投稿" ,class:"btn btn-outline-dark m-1" %>
+<% end %>
+<%= render  "shared/footer" %>
