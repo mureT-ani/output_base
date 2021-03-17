@@ -7,12 +7,19 @@ RSpec.describe Post, type: :model do
     end
 
     context '投稿できる場合' do
-      it 'テキストが空でなければ投稿できること' do
+      it 'タイトルとテキストが空でなければ投稿できること' do
         expect(@post).to be_valid
       end
     end
 
     context '投稿できない場合' do
+
+      it 'タイトルが空だと投稿できないこと' do
+        @post.title = nil
+        @post.valid?
+        expect(@post.errors.full_messages).to include("Title can't be blank")
+      end
+
       it 'テキストが空だと投稿できないこと' do
         @post.post_text = nil
         @post.valid?
