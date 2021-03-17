@@ -1,0 +1,22 @@
+<%= render  "shared/header" %>
+<h1><%= @post.title %></h1>
+<%= @post.post_text %>
+<div>
+  <p>投稿者: <%= link_to  @post.user.nickname, "#", class: "text-dark" %></p>
+</div>
+<% if current_user.id == @post.user.id %>
+  <%= link_to  "編集", "#" %>
+  <%= link_to  "削除", "#" %>
+<% else %>
+  <%#= link_to  "高評価", "#" %>
+  <%#= form_with model: @comment, local: true do |f| %>
+    <%#= render  "shared/error_messages", model: f.object %>
+    <%#= f.text_area :comment_text,id: "comments-text", rows:"7", maxlength:"1000" %>
+    <%#= f.submit "コメントする", class:"btn " %>
+  <%# end %>
+<% end %>
+<%# @post.comment.each do |comment|%>
+  <%#= comment.user.nickname%>
+  <%#= comment.comment_text%>
+<%# end %>
+<%= render  "shared/footer" %>
