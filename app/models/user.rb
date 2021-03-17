@@ -9,9 +9,9 @@ class User < ApplicationRecord
 
   validates :email, uniqueness: true
   with_options presence: true do
-       validates :nickname
-       validates :job_id
-       validates :birthday
+    validates :nickname
+    validates :job_id
+    validates :birthday
   end
   validates :job_id, numericality: { other_than: 1 }
-  end
+end
