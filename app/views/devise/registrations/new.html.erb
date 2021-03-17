@@ -1,0 +1,45 @@
+<%= render  "shared/header" %>
+<h2 class="text-center">新規登録</h2>
+<%= form_with model:@user, url: user_registration_path, local: true do |f| %>
+  <div class="text-center">
+    <%= render "devise/shared/error_messages", model: f.object %>
+      <div>
+        <label>ニックネーム</label>
+      </div>
+      <%= f.text_area :nickname, class:"w-50 m-1", id:"nickname", autofocus: true %>
+      <div>
+        <label>メールアドレス</label>
+      </div>
+      <%= f.email_field :email, class:"w-50 m-1", id:"email", autofocus: true %>
+      <div>
+        <label>パスワード</label>
+      </div>
+      <%= f.password_field :password, class:"w-50 m-1", id:"password", autofocus: true %>
+      <div>
+        <label>パスワード(確認)</label>
+      </div>
+      <%= f.password_field :password_confirmation, class:"w-50 m-1", id:"password-confirmation", autofocus: true %>
+      <div>
+        <label>職業</label>
+      </div>
+      <%= f.collection_select(:job_id, Job.all, :id, :name, {}, {class:"m-1", id:"item-category"}) %>
+      <div>
+        <label>生年月日</label>
+      </div>
+      <%= raw sprintf(
+                  f.date_select(
+                    :birthday,
+                    class:'select-birth',
+                    id:"birth-date",
+                    use_month_numbers: true,
+                    prompt:'--',
+                    start_year: 1930,
+                    end_year: (Time.now.year - 5),
+                    date_separator: '%s'),
+                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+      <%= f.submit "会員登録" ,class:"btn btn-outline-primary m-1" %>
+  </div>
+<% end %>
+
+<%= link_to "ログインはこちら", new_session_path(resource_name), class: "" %>
+<%= render  "shared/footer" %>
