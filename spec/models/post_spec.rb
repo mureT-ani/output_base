@@ -13,7 +13,6 @@ RSpec.describe Post, type: :model do
     end
 
     context '投稿できない場合' do
-
       it 'タイトルが空だと投稿できないこと' do
         @post.title = nil
         @post.valid?

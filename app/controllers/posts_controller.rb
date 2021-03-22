@@ -1,6 +1,10 @@
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new edit]
+  before_action :set_post, only: %i[show edit update]
+  before_action :contributor_check, only: %i[edit update]
+
   def index
-    @post = Post.includes(:user).order("created_at DESC")
+    @post = Post.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -18,10 +22,28 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+  end
+
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to post_path(@post.id)
+    else
+      render :edit
+    end
   end
 
   private
+
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def contributor_check
+    redirect_to root_path if current_user.id != @post.user_id
+  end
 
   def post_params
     params.require(:post).permit(:title, :post_text).merge(user_id: current_user.id)
