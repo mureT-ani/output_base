@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :goods
   has_many :liked_posts, through: :goods, source: :post
+  has_many :comments
 
   validates :email, uniqueness: true
   with_options presence: true do
