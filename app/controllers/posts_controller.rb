@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit]
   before_action :set_post, only: %i[show edit update destroy]
-  before_action :contributor_check, only: %i[edit update]
+  before_action :contributor_check, only: %i[edit update destroy]
 
   def index
     @post = Post.includes(:user).order('created_at DESC')
