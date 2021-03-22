@@ -17,7 +17,7 @@
       <% else %>
         <%= form_with model: [@post, @comment], local: true do |f| %>
           <%= render  "shared/error_messages", model: f.object %>
-          <%= f.text_area :comment_text, id: "comments-text", rows:"3", maxlength:"1000",class: "d-block w-25 m-1" %>
+          <%= f.text_area :comment_text, id: "comments-text", rows:"3", maxlength:"200",class: "d-block w-25 m-1" %>
           <%= f.submit "コメントする", class: "m-1" %>
         <% end %>
       <% end %>
