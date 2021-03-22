@@ -1,29 +1,31 @@
 <%= render  "shared/header" %>
-<h1><%= @post.title %></h1>
-<%= @post.post_text %>
-<div class = "d-flex flex-column">
-  <p>投稿者: <%= link_to  @post.user.nickname, "#", class: "text-dark" %></p>
-  <p>高評価数： <%= @post.goods.count %></p>
-  <% if user_signed_in? %>
-    <% if current_user.already_liked?(@post) %>
-      <%= link_to  "高評価を取り消す", post_good_path(@post.id), method: :delete %>
-    <% else %>
-      <%= link_to  "高評価", post_goods_path(@post.id), method: :post %>
+<div class="p-1">
+  <h1><%= @post.title %></h1>
+  <%= @post.post_text %>
+  <div class = "d-flex flex-column">
+    <p>投稿者: <%= link_to  @post.user.nickname, "#", class: "text-dark" %></p>
+    <p>高評価数： <%= @post.goods.count %></p>
+    <% if user_signed_in? %>
+      <% if current_user.already_liked?(@post) %>
+        <%= link_to  "高評価を取り消す", post_good_path(@post.id), method: :delete %>
+      <% else %>
+        <%= link_to  "高評価", post_goods_path(@post.id), method: :post %>
+      <% end %>
+      <% if current_user.id == @post.user.id %>
+        <%= link_to  "編集", edit_post_path(@post.id) %>
+        <%= link_to  "削除", post_path(@post.id), method: :delete %>
+      <% else %>
+        <%= form_with model: [@post, @comment], local: true do |f| %>
+          <%= render  "shared/error_messages", model: f.object %>
+          <%= f.text_area :comment_text, id: "comments-text", rows:"3", maxlength:"1000",class: "d-block w-25 m-1" %>
+          <%= f.submit "コメントする", class: "m-1" %>
+        <% end %>
+      <% end %>
     <% end %>
-    <% if current_user.id == @post.user.id %>
-      <%= link_to  "編集", edit_post_path(@post.id) %>
-      <%= link_to  "削除", post_path(@post.id), method: :delete %>
-    <% else %>
-      <%#= form_with model: @comment, local: true do |f| %>
-        <%#= render  "shared/error_messages", model: f.object %>
-        <%#= f.text_area :comment_text,id: "comments-text", rows:"7", maxlength:"1000" %>
-        <%#= f.submit "コメントする", class:"btn " %>
-      <%# end %>
-    <% end %>
-  <% end %>
-  <%# @post.comment.each do |comment|%>
-    <%#= comment.user.nickname%>
-    <%#= comment.comment_text%>
-  <%# end %>
+    <%# @post.comment.each do |comment|%>
+      <%#= comment.user.nickname%>
+      <%#= comment.comment_text%>
+    <%# end %>
+  </div>
 </div>
 <%= render  "shared/footer" %>
