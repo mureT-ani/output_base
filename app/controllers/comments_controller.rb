@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
       redirect_to post_path(@comment.post.id)
     else
       @post = Post.find(params[:post_id])
+      @comments = @post.comments.includes(:user)
       render 'posts/show'
     end
   end
