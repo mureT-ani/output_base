@@ -18,9 +18,9 @@ RSpec.describe Comment, type: :model do
       end
 
       it 'テキストが200文字より多いと投稿できないこと' do
-        @comment.comment_text = Faker::Lorem.characters(number:201)
+        @comment.comment_text = Faker::Lorem.characters(number: 201)
         @comment.valid?
-        expect(@comment.errors.full_messages).to include("Comment text is too long (maximum is 200 characters)")
+        expect(@comment.errors.full_messages).to include('Comment text is too long (maximum is 200 characters)')
       end
 
       it 'ユーザーが空だと投稿できないこと' do
