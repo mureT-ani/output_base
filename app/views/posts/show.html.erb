@@ -3,6 +3,7 @@
 <%= @post.post_text %>
 <div>
   <p>投稿者: <%= link_to  @post.user.nickname, "#", class: "text-dark" %></p>
+  <p>高評価数： <%= @post.goods.count %></p>
 </div>
 <% if user_signed_in? %>
   <% if current_user.id == @post.user.id %>
