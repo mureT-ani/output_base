@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: %i[new edit]
-  before_action :set_post, only: %i[show edit update]
+  before_action :set_post, only: %i[show edit update destroy]
   before_action :contributor_check, only: %i[edit update]
 
   def index
@@ -32,6 +32,14 @@ class PostsController < ApplicationController
       redirect_to post_path(@post.id)
     else
       render :edit
+    end
+  end
+
+  def destroy
+    if @post.destroy
+      redirect_to root_path
+    else
+      render :show
     end
   end
 
