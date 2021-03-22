@@ -22,14 +22,13 @@ class CommentsController < ApplicationController
   end
 
   private
+
   def set_comment
     @comment = Comment.find_by(id: params[:id], post_id: params[:post_id])
   end
 
   def comment_user_check
-    if current_user.id != @comment.user_id
-      redirect_to root_path
-    end
+    redirect_to root_path if current_user.id != @comment.user_id
   end
 
   def comment_params
