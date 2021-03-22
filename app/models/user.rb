@@ -8,6 +8,8 @@ class User < ApplicationRecord
   belongs_to :job
 
   has_many :posts
+  has_many :goods
+  has_many :liked_posts, through: :goods, source: :post
 
   validates :email, uniqueness: true
   with_options presence: true do

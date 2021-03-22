@@ -14,6 +14,7 @@
 
 - has_many :posts
 - has_many :comments
+- has_many :goods
 - has_many :liked_posts, through: :goods, source: :post
 
 ## posts テーブル
@@ -28,6 +29,7 @@
 
 - belongs_to :user
 - has_many   :comments
+- has_many   :goods
 - has_many   :liked_users,   through: :goods, source: :user
 - has_many   :tags,          through: :post_tags
 
