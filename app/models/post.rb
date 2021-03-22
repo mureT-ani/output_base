@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :goods
   has_many :liked_users, through: :goods, source: :user
+  has_many :comments
 
   validates :title, presence: true
   validate :post_text_required

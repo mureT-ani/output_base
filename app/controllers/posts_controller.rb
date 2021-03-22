@@ -23,6 +23,7 @@ class PostsController < ApplicationController
 
   def show
     @good = Good.new
+    @comment = Comment.new
   end
 
   def edit
