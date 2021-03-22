@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :contributor_check, only: %i[edit update]
 
   def index
-    @post = Post.includes(:user).order("created_at DESC")
+    @post = Post.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -31,7 +31,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to post_path(@post.id)
     else
-      render:edit
+      render :edit
     end
   end
 
@@ -42,13 +42,10 @@ class PostsController < ApplicationController
   end
 
   def contributor_check
-    if current_user.id != @post.user_id
-      redirect_to root_path 
-    end
+    redirect_to root_path if current_user.id != @post.user_id
   end
 
   def post_params
     params.require(:post).permit(:title, :post_text).merge(user_id: current_user.id)
   end
-
 end
