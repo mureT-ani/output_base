@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @good = Good.new
+    @good = Good.find_by(post_id: @post.id, user_id: current_user.id)
     @comment = Comment.new
     @comments = @post.comments.includes(:user)
   end
