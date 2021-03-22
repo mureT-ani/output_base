@@ -22,10 +22,12 @@
         <% end %>
       <% end %>
     <% end %>
-    <%# @post.comment.each do |comment|%>
-      <%#= comment.user.nickname%>
-      <%#= comment.comment_text%>
-    <%# end %>
+    <% @comments.each do |comment|%>
+      <div class="border border-dark m-1 p-1 ">
+        <p><%= comment.user.nickname%>さんのコメント</p>
+        <p><%= safe_join(comment.comment_text.split("\n"),tag(:br)) %></p>
+      </div>
+    <% end %>
   </div>
 </div>
 <%= render  "shared/footer" %>
