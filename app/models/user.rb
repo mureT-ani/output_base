@@ -8,6 +8,8 @@ class User < ApplicationRecord
   belongs_to :job
 
   has_many :posts
+  has_many :goods
+  has_many :liked_posts, through: :goods, source: :post
 
   validates :email, uniqueness: true
   with_options presence: true do
@@ -16,4 +18,8 @@ class User < ApplicationRecord
     validates :birthday
   end
   validates :job_id, numericality: { other_than: 1 }
+
+  def already_liked?(post)
+    goods.exists?(post_id: post.id)
+  end
 end

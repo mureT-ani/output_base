@@ -22,6 +22,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @good = Good.new
   end
 
   def edit
