@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
-before_action :set_post, only: %i[show edit update]
+  before_action :authenticate_user!, only: %i[new edit]
+  before_action :set_post, only: %i[show edit update]
+  before_action :contributor_check, only: %i[edit update]
 
   def index
     @post = Post.includes(:user).order("created_at DESC")
@@ -35,11 +37,18 @@ before_action :set_post, only: %i[show edit update]
 
   private
 
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  def contributor_check
+    if current_user.id != @post.user_id
+      redirect_to root_path 
+    end
+  end
+
   def post_params
     params.require(:post).permit(:title, :post_text).merge(user_id: current_user.id)
   end
 
-  def set_post
-    @post = Post.find(params[:id])
-  end
 end
