@@ -31,7 +31,6 @@ RSpec.describe Good, type: :model do
         anoter_good.valid?
         expect(anoter_good.errors.full_messages).to include('Post has already been taken')
       end
-
     end
   end
 end
