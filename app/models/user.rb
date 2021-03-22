@@ -18,4 +18,8 @@ class User < ApplicationRecord
     validates :birthday
   end
   validates :job_id, numericality: { other_than: 1 }
+
+  def already_liked?(post)
+    self.goods.exists?(post_id: post.id)
+  end
 end

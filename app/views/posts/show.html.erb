@@ -9,7 +9,11 @@
     <%= link_to  "編集", edit_post_path(@post.id) %>
     <%= link_to  "削除", post_path(@post.id), method: :delete %>
   <% else %>
-    <%#= link_to  "高評価", "#" %>
+    <% if current_user.already_liked?(@post) %>
+      <%= link_to  "高評価を取り消す", post_good_path(@post.id), method: :delete %>
+    <% else %>
+      <%= link_to  "高評価", post_goods_path(@post.id), method: :post %>
+    <% end %>
     <%#= form_with model: @comment, local: true do |f| %>
       <%#= render  "shared/error_messages", model: f.object %>
       <%#= f.text_area :comment_text,id: "comments-text", rows:"7", maxlength:"1000" %>
