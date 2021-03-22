@@ -25,6 +25,13 @@ before_action :set_post, only: %i[show edit update]
   def edit
   end
 
+  def update
+    if @post.update(post_params)
+      redirect_to post_path(@post.id)
+    else
+      render:edit
+    end
+  end
 
   private
 
