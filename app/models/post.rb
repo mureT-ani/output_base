@@ -4,6 +4,8 @@ class Post < ApplicationRecord
   has_many :goods
   has_many :liked_users, through: :goods, source: :user
   has_many :comments
+  has_many :post_tags
+  has_many :tags, through: :post_tags
 
   validates :title, presence: true
   validate :post_text_required
