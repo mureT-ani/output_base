@@ -6,6 +6,8 @@
   <%= f.text_area :title, class:"w-50" %>
   <%= f.label :post_text, "本文", class:"m-1 d-block" %>
   <%= f.rich_text_area :post_text %>
+  <%= f.label :name, "タグ", class:"m-1 d-block" %>
+  <%= f.text_field :name, class:"w-25" %>
   <%= f.submit "投稿" ,class:"btn btn-outline-dark m-1" %>
 <% end %>
 <%= render  "shared/footer" %>
