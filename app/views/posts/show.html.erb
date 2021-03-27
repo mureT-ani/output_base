@@ -21,15 +21,16 @@
           <%= f.submit "コメントする", class: "m-1" %>
         <% end %>
       <% end %>
-    <% end %>
-    <% @comments.each do |comment|%>
-      <div class="border border-dark m-1 p-1 ">
-        <p><%= comment.user.nickname%>さんのコメント</p>
-        <p><%= safe_join(comment.comment_text.split("\n"),tag(:br)) %></p>
-        <% if current_user.id == comment.user_id %>
-          <%= link_to  "削除", post_comment_path(@post.id, comment.id), method: :delete %>
-        <% end %>
-      </div>
+      <% @comments.each do |comment|%>
+        <div class="border border-dark m-1 p-1 ">
+          <p><%= comment.user.nickname%>さんのコメント</p>
+          <p><%= safe_join(comment.comment_text.split("\n"),tag(:br)) %></p>
+          <% if current_user.id == comment.user_id %>
+            <%= link_to  "削除", post_comment_path(@post.id, comment.id), method: :delete %>
+          <% end %>
+        </div>
+      <% end %>
+
     <% end %>
   </div>
 </div>
