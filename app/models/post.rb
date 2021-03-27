@@ -1,9 +1,9 @@
 class Post < ApplicationRecord
   has_rich_text :post_text
   belongs_to :user
-  has_many :goods
+  has_many :goods, dependent: :destroy
   has_many :liked_users, through: :goods, source: :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   validates :title, presence: true
   validate :post_text_required
