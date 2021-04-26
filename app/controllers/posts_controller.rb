@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :contributor_check, only: %i[edit update destroy]
 
   def index
-    @post = Post.includes(:user).order('created_at DESC')
+    @post = Post.includes(:user, :tags).order('created_at DESC')
   end
 
   def new

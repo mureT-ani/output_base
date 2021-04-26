@@ -7,8 +7,10 @@
       <p>タイトル： <%= link_to  post.title, post_path(post.id), class: "text-dark" %></p>
       <p>高評価数： <%= post.liked_users.count %></p>
       <div class="d-flex flex-row">
-        <div class="m-1">ジャンル</div>
-        <div class="m-1">ジャンル</div>
+        <p>タグ：</p>
+        <% post.tags.each do |tag| %>
+          <div class="m-1"><%= tag.name %></div>
+        <% end %>
       </div>
     </div>
   <% end %>
