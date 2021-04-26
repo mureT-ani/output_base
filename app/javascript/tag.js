@@ -2,7 +2,9 @@ if (location.pathname.match("posts/new")) {
   document.addEventListener("DOMContentLoaded", () => {
     const inputElement = document.getElementById("post_name");
     inputElement.addEventListener("keyup", () => {
-      const keyword = document.getElementById("post_name").value;
+      const keywords = document.getElementById("post_name").value.split(",");
+      const keyword = keywords[keywords.length - 1];
+      keywords.pop()
       const XHR = new XMLHttpRequest();
       XHR.open("GET", `search/?keyword=${keyword}`, true);
       XHR.responseType = "json";
@@ -26,7 +28,12 @@ if (location.pathname.match("posts/new")) {
               clickElement.removeAttribute("class", "bg-secondary");
             });
             clickElement.addEventListener("click", () => {
-              document.getElementById("post_name").value = clickElement.textContent;
+              let newKeyword = "";
+              keywords.forEach((restKeyword) => {
+                newKeyword += restKeyword + ","
+              });
+              newKeyword += clickElement.textContent;
+              document.getElementById("post_name").value = newKeyword;
               clickElement.remove();
             });
           });
