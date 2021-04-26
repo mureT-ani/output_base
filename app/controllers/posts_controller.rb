@@ -4,7 +4,7 @@ class PostsController < ApplicationController
   before_action :contributor_check, only: %i[edit update destroy]
 
   def index
-    @post = Post.includes(:user).order('created_at DESC')
+    @post = Post.includes(:user, :goods, :tags).order('created_at DESC')
   end
 
   def new
@@ -13,8 +13,10 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
+    tag_list = params[:post][:name].split(',')
     if @post.valid?
       @post.save
+      @post.save_posts(tag_list)
       redirect_to root_path
     else
       render :new
@@ -44,6 +46,13 @@ class PostsController < ApplicationController
     else
       render :show
     end
+  end
+
+  def search
+    return nil if params[:keyword] == ''
+
+    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"])
+    render json: { keyword: tag }
   end
 
   private

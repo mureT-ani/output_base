@@ -1,11 +1,15 @@
 <%= render  "shared/header" %>
 <h1>アウトプット投稿</h1>
-<%= form_with model:@post, url: posts_path, local: true do |f| %>
+<%= form_with model:@post, url: posts_path, local: true, class: "m-1" do |f| %>
   <%= render  "shared/error_messages", model: f.object %>
   <%= f.label :title, "タイトル", class:"m-1 d-block" %>
   <%= f.text_area :title, class:"w-50" %>
   <%= f.label :post_text, "本文", class:"m-1 d-block" %>
   <%= f.rich_text_area :post_text %>
+  <%= f.label :name, "タグ", class:"m-1 d-block" %>
+  <%= f.text_field :name, placeholder:"複数のタグを登録す場合は,で区切ってください。", class:"w-50" %>
+  <div id="search-result", class="bg-light">
+  </div>
   <%= f.submit "投稿" ,class:"btn btn-outline-dark m-1" %>
 <% end %>
 <%= render  "shared/footer" %>
