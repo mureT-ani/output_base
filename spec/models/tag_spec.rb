@@ -8,7 +8,7 @@ RSpec.describe Tag, type: :model do
 
     context '作成出来る場合' do
       it '名前が空でなければ作成できること' do
-        expect(@tag).to be_valid        
+        expect(@tag).to be_valid
       end
     end
 
@@ -23,7 +23,7 @@ RSpec.describe Tag, type: :model do
         @tag.save
         new_tag = FactoryBot.build(:tag, name: @tag.name)
         new_tag.valid?
-        expect(new_tag.errors.full_messages).to include("Name has already been taken")
+        expect(new_tag.errors.full_messages).to include('Name has already been taken')
       end
     end
   end
