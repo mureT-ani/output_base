@@ -4,5 +4,8 @@ Rails.application.routes.draw do
   resources :posts do
     resources :goods,    only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
+    collection do
+      get 'search'
+    end
   end
 end
