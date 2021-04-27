@@ -33,7 +33,9 @@ class PostsController < ApplicationController
   end
 
   def update
+    tag_list = params[:post][:name].split(',')
     if @post.update(post_params)
+      @post.save_posts(tag_list)
       redirect_to post_path(@post.id)
     else
       render :edit

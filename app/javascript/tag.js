@@ -1,4 +1,4 @@
-if (location.pathname.match("posts/new")) {
+if (location.pathname.match("posts/new") || location.pathname.includes("posts" && "edit")) {
   document.addEventListener("DOMContentLoaded", () => {
     const inputElement = document.getElementById("post_name");
     inputElement.addEventListener("keyup", () => {
@@ -6,7 +6,7 @@ if (location.pathname.match("posts/new")) {
       const keyword = keywords[keywords.length - 1];
       keywords.pop()
       const XHR = new XMLHttpRequest();
-      XHR.open("GET", `search/?keyword=${keyword}`, true);
+      XHR.open("GET", `/posts/search/?keyword=${keyword}`, true);
       XHR.responseType = "json";
       XHR.send();
       XHR.onload = () => {
@@ -35,6 +35,7 @@ if (location.pathname.match("posts/new")) {
               newKeyword += clickElement.textContent;
               document.getElementById("post_name").value = newKeyword;
               clickElement.remove();
+              document.getElementById("post_name").focus();
             });
           });
         };

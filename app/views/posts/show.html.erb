@@ -5,6 +5,12 @@
   <div class = "d-flex flex-column">
     <p>投稿者: <%= link_to  @post.user.nickname, "#", class: "text-dark" %></p>
     <p>高評価数： <%= @post.goods.count %></p>
+    <div class="d-flex flex-row">
+      <p>タグ：</p>
+      <% @post.tags.each do |tag| %>
+        <div class="m-1"><%= tag.name %></div>
+      <% end %>
+    </div>
     <% if user_signed_in? %>
       <% if current_user.already_liked?(@post) %>
         <%= link_to  "高評価を取り消す", post_good_path(@post.id, @good.id), method: :delete %>
