@@ -35,6 +35,7 @@ if (location.pathname.match("posts/new") || location.pathname.includes("posts" &
               newKeyword += clickElement.textContent;
               document.getElementById("post_name").value = newKeyword;
               clickElement.remove();
+              document.getElementById("post_name").focus();
             });
           });
         };
