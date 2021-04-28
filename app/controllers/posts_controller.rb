@@ -60,11 +60,11 @@ class PostsController < ApplicationController
   def search
     @q = Post.ransack(params[:q])
     @tags = Tag.all
-    if @q.result.length == Post.count
-      @results = []
-    else
-      @results = @q.result.includes(:user, :goods, :tags)
-    end
+    @results = if @q.result.length == Post.count
+                 []
+               else
+                 @q.result.includes(:user, :goods, :tags)
+               end
   end
 
   private
