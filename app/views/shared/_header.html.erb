@@ -2,7 +2,7 @@
   <%= link_to  "アウトプットベース", root_path, class: "navbar-brand my-0 mr-md-auto font-weight-normal" %>
   <nav class="my-2 my-md-0 mr-md-3">
     <%= link_to  "アウトプット投稿", new_post_path, class: "p-2 text-dark" %>
-    <a class="p-2 text-dark" href="#">アウトプット検索</a>
+    <%= link_to  "アウトプット検索", search_posts_path, class: "p-2 text-dark" %>
     <% if user_signed_in? %>
       <%= link_to  "#{current_user.nickname}", url="#" %>
     <% end %>

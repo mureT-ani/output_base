@@ -6,7 +6,7 @@ if (location.pathname.match("posts/new") || location.pathname.includes("posts" &
       const keyword = keywords[keywords.length - 1];
       keywords.pop()
       const XHR = new XMLHttpRequest();
-      XHR.open("GET", `/posts/search/?keyword=${keyword}`, true);
+      XHR.open("GET", `/posts/tag_search/?keyword=${keyword}`, true);
       XHR.responseType = "json";
       XHR.send();
       XHR.onload = () => {
