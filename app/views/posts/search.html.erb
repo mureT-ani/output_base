@@ -1,5 +1,27 @@
 <%= render  "shared/header" %>
-<div class="d-flex flex-column">
+<div class="d-flex flex-column ">
   <h3 class="text-center">アウトプット検索</h3>
+  <%= search_form_for @q, url: search_posts_path do |f| %>
+    <%= f.label :title_cont, 'タイトル', class:"d-block m-1" %>
+    <%= f.search_field :title_cont, class:"d-block m-1" %>
+    <%= f.label :tags_id_in, 'タグ' %>
+    <%= f.collection_check_boxes :tags_id_in, @tags, :id, :name %>
+    <%= f.submit '検索', class:"d-block m-1" %>
+  <% end %>
 </div>
+<% if @results.length != 0 %>
+  <% @results.each do |result| %>
+    <div class="p-2 m-2 border border-dark d-flex flex-column">
+      <p>投稿者： <%= link_to  result.user.nickname, "#", class: "font-italic text-dark" %></p>
+      <p>タイトル： <%= link_to  result.title, post_path(result.id), class: "text-dark" %></p>
+      <p>高評価数： <%= result.liked_users.count %></p>
+      <div class="d-flex flex-row">
+        <p>タグ：</p>
+        <% result.tags.each do |tag| %>
+          <div class="m-1"><%= tag.name %></div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
 <%= render  "shared/footer" %>

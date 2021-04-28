@@ -57,6 +57,16 @@ class PostsController < ApplicationController
     render json: { keyword: tag }
   end
 
+  def search
+    @q = Post.ransack(params[:q])
+    @tags = Tag.all
+    if @q.result.length == Post.count
+      @results = []
+    else
+      @results = @q.result.includes(:user, :goods, :tags)
+    end
+  end
+
   private
 
   def set_post
