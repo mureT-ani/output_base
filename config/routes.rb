@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :goods,    only: [:create, :destroy]
     resources :comments, only: [:create, :destroy]
     collection do
-      get 'search'
+      get 'tag_search'
     end
   end
 end
